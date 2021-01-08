@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drawing App - GraphicsLearn</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- CUSTOM CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_draw.css') }}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+        <!-- CUSTOM JS -->
+        <script type="text/javascript" src="{{ url_for('static', filename='draw.js') }}"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <style>
+              /* Loại bỏ lề mặc định của thanh điều hướng-dưới cùng và đường viền tròn */
+              .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+              }
+
+              /* Thêm màu nền xám và một số phần đệm vào chân trang */
+              footer {
+                background-color: #f2f2f2;
+                padding: 25px;
+              }
+
+            .carousel-inner img {
+                width: 100%; /* width to 100% */
+                margin: auto;
+                min-height:200px;
+            }
+
+            /* Ẩn văn bản băng chuyền khi màn hình rộng dưới 600 pixel */
+            @media (max-width: 600px) {
+              .carousel-caption {
+                display: none;
+              }
+            }
+
+            body{
+              background-color: lavender !important;
+              font-family: system-ui;
+            }
+
+            .container {
+              position: relative;
+              width: 100%;
+              overflow: hidden;
+              /* padding-top: 56.25%; /* 16:9 khung hình */ */
+            }
+
+
+
+            /* ---------------------------------------------------------NỘI DUNG CHƯƠNG TRÌNH DEMO-----------------------------------------------  */
+            /* Tạo ba cột bằng nhau */
+            .column {
+              float: left;
+              width: 33.33%;
+              padding: 15px;
+            }
+
+            /* xóa cột sau */
+            .row:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+
+            /* Bố cục đáp ứng - làm cho ba cột xếp chồng lên nhau thay vì cạnh nhau */
+            @media screen and (max-width:600px) {
+              .column {
+                width: 100%;
+              }
+            }
+
+
+            .wrap-main{
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            background: #fff;
+            height: 600px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+
+        <div class="results">
+            {%if prediction%}
+            <h1 style="color: red;">It's {{ prediction }}</h1>
+            {%else%}
+            <h1 style="color: red;">Sorry</h1>
+            {%endif%}
+        </div>
+
+        <div class="wrap-main" id="kq"> <!-- SQUARE -->
+            {%if prediction=="square"%}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                  <iframe src="https://trinket.io/embed/python/62aa1ddf00?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action ">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Đặt biến độ dài cho kích thước của hình vuông mà bạn muốn</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Ta chỉ cần sử dụng vòng lặp 4 lần (di chuyển 100 bước + xoay trái 90 độ) mà thôi.</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- PANDA -->
+            {%elif prediction=="panda" %}
+            <div class="row">
+                <div class="column">
+                    <h3>Demo</h3>
+                    <iframe src="https://trinket.io/embed/python/6fba2b22e0?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Xác định phương pháp để vẽ một hình tròn với bán kính động và màu sắc</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ tai của Panda với các vòng tròn màu đen.</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ khuôn mặt của Panda với vòng tròn màu trắng</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ đôi mắt của Panda với các vòng tròn đồng tâm màu đen và trắng.</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ mũi của Panda với vòng tròn màu đen và Vẽ hai hình bán nguyệt cho miệng dưới mũi.</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ mũi của Panda với vòng tròn màu đen và Vẽ hai hình bán nguyệt cho miệng dưới mũi.</a>
+                        <a href="#" class="list-group-item list-group-item-action"> # pen.up -> di chuyển rùa lên không trung <br>
+                                                                                     # pen.down -> di chuyển rùa xuống đất <br>
+                                                                                     # pen.setpos -> di chuyển rùa đến vị trí đã cho <br>
+                                                                                     # ring(color, radius) -> vẽ một vòng có màu và bán kính được chỉ định
+                        </a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h3>Chương trình của bạn</h3>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- CLOUD -->
+            {%elif prediction=="cloud" %}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                    <iframe src="https://trinket.io/embed/python/8fb6456a0f?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Xây dựng hàm vẽ hình tròn</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ 3 hình tròn cùng màu xếp chồng lên nhau nhưng không trùng nhau, nền vẽ màu đen.</a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- -TRIANGLE -->
+            {%elif prediction=="triangle" %}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                    <iframe src="https://trinket.io/embed/python/22edb6154f?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Chọn kích thước nét vẽ <b>t.pensize(kích thước)</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Ta chỉ cần sử dụng vòng lặp 3 lần (di chuyển 100 bước + xoay trái 120 độ) mà thôi.</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- STAR -->
+            {%elif prediction=="star" %}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                  <iframe src="https://trinket.io/embed/python/bafe0e70f8?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Chọn kích thước nét vẽ <b>t.pensize(kích thước)</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Ta chỉ cần sử dụng vòng lặp 5 lần (di chuyển 150 bước + xoay phải 144 độ) mà thôi.</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- SMILEYFACE -->
+            {%elif prediction=="smileyface" %}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                    <iframe src="https://trinket.io/embed/python/b7347ce444?toggleCode=true&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ một vòng tròn và tô màu vàng</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ mắt bằng hai hình tròn và tô màu trắng và đen tương ứng</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ nửa vòng tròn cho miệng</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ nửa vòng tròn cho lưỡi và tô màu đỏ</a>
+
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- MOON -->
+            {%elif prediction=="moon" %}
+            <div class="row">
+                <div class="column">
+                    <h2>Demo</h2>
+                    <iframe src = "https://trinket.io/embed/python/c5d55e687b?toggleCode=true&start=result" width = "100%" height = "356" frameborder = "0" marginwidth = "0" marginheight = "0" allowfullscreen > </iframe>
+                </div>
+
+                <div class="column" border="1">
+                    <h2>Hướng dẫn</h2>
+
+                    <div class="list-group" style="text-align:left;">
+                        <a href="#" class="list-group-item list-group-item-action">- Để khởi động môi trường đồ họa con rùa ta thực hiện lệnh <b>import turtle</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Gọi phương thức khởi tạo của lớp Turtle <br> <b>t = turtle.Turtle()</b></a>
+                        <a href="#" class="list-group-item list-group-item-action">- Xây dựng hàm vẽ hình tròn</a>
+                        <a href="#" class="list-group-item list-group-item-action">- Vẽ 3 hình tròn xếp chồng lên nhau, trong đó 2 hình trái phải cùng màu với màu nền</a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>Chương trình của bạn</h2>
+                    <iframe src="https://trinket.io/embed/python/85bba81acb" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+    </body>
+</html>

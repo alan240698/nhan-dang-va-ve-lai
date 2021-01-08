@@ -1,0 +1,25 @@
+
+from turtle import *
+
+t = Turtle()
+t.shape("turtle")
+t.speed(20)
+
+import turtle
+turtle.Screen().bgcolor("black")
+def draw_circle(turtle, color, size, x, y):
+  turtle.penup()
+  turtle.color(color)
+  turtle.fillcolor(color)
+  turtle.goto(x,y)
+  turtle.pendown()
+  turtle.begin_fill()
+  turtle.circle(size)
+  turtle.end_fill()
+
+# Draw three circles:
+draw_circle(t, "black", 50, 25, 0)
+draw_circle(t, "yellow", 50, 0, 0)
+draw_circle(t, "black", 50, -25, 0)
+
+
